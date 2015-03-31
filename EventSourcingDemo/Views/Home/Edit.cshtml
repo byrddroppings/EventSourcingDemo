@@ -1,0 +1,13 @@
+﻿@model EventSourcingDemo.Models.Person
+
+@using (Html.BeginForm())
+{
+    <h2>Edit Person</h2>
+    @Html.ValidationSummary()    
+    <div>@Html.TextBoxFor(m => m.FirstName)</div>
+    <div>@Html.TextBoxFor(m => m.LastName)</div>
+    <div>@Html.CheckBox("pending") Requires Approval?</div>
+    @Html.HiddenFor(m => m.PersonId)
+    <div><input type="submit" value="Submit"/>
+    </div>
+}

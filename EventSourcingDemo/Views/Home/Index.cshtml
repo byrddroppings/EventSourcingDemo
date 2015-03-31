@@ -1,0 +1,82 @@
+﻿@model EventSourcingDemo.Models.ViewModel
+
+<div>
+    <h2>People</h2>
+    <div>
+        <table>
+            <tr>
+                <th>Status</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var person in Model.People)
+            {
+                <tr>
+                    <td>@person.Status</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>
+                        @Html.ActionLink("Select", "Index", new { id = person.PersonId })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Edit", "Edit", new { id = person.PersonId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    @if (Model.Person != null)
+    {
+        <br/>
+        <h1>@Model.Person.FirstName @Model.Person.LastName</h1>
+        
+        if (Model.PendingCommands.Any())
+         {
+             <h2>Pending Commands</h2>
+             <table>
+                 <tr>
+                     <th>Command Id</th>
+                     <th>Command Status</th>
+                     <th>Command Type</th>
+                     <th>Command Data</th>
+                     <th>Actions</th>
+                 </tr>
+                 @foreach (var command in Model.PendingCommands)
+                 {
+                     <tr>
+                         <td>@command.CommandLogId</td>
+                         <td>@command.Status</td>
+                         <td>@command.Command</td>
+                         <td><pre>@command.Data</pre></td>
+                         <td>
+                             @Html.ActionLink("Approve", "Approve", new {id = command.CommandLogId})
+                             @Html.ActionLink("Reject", "Reject", new {id = command.CommandLogId})
+                         </td>
+                     </tr>
+                 }
+             </table>
+         }
+         
+        <h2>Command History</h2>
+        <table>
+            <tr>
+                <th>Command Id</th>
+                <th>Command Status</th>
+                <th>Command Type</th>
+                <th>Command Data</th>
+                <th>Timestamp</th>
+            </tr>
+            @foreach (var command in Model.Commands)
+            {
+                <tr>
+                    <td>@command.CommandLogId</td>
+                    <td>@command.Status</td>
+                    <td>@command.Command</td>
+                    <td><pre>@command.Data</pre></td>
+                    <td>@command.Timestamp</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

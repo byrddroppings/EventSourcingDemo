@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Event Sourcing Demo</title>
+    <style>
+        #header {
+             background-color: blue; 
+             color: white; 
+             padding:5px
+        }
+         div {
+              margin: 5px;
+         }
+         form {
+             border: solid 1px black;
+             margin: 25px;
+             padding: 25px;
+         }
+         table {
+             border-collapse: collapse
+         }
+         td, th {
+             border: solid 1px black;
+             padding: 5px;
+         }
+    </style>
+</head>
+<body>
+    <div id="header">Event Sourcing Demo</div>
+
+    <div>
+        | @Html.ActionLink("Home", "Index")
+        | @Html.ActionLink("Create Person", "Create")
+        | @Html.ActionLink("Clear All Data", "ClearAll")
+        @*| @Html.ActionLink("Clear People", "ClearPeople")*@
+    </div>
+
+    @RenderBody()
+</body>
+</html>
